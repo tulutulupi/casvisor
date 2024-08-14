@@ -76,7 +76,8 @@ func UpdatePatches(asset *Asset) error {
 		return fmt.Errorf("hostname not match")
 	}
 	patches := asset.Patches
-	err = patch.UpdatePatches(deepCopyPatches(patches))
+	newPatches, err := patch.UpdatePatches(deepCopyPatches(patches))
+	asset.Patches = deepCopyPatches2(newPatches)
 	if err != nil {
 		return err
 	}

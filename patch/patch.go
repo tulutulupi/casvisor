@@ -19,22 +19,22 @@ import (
 	"strings"
 )
 
-func UpdatePatches(patches []*Patch) error {
+func UpdatePatches(patches []*Patch) ([]*Patch, error) {
 	for _, patchItem := range patches {
 		if patchItem.ExpectedStatus == "Install" && patchItem.Status == "Uninstall" {
 			err := InstallPatch(patchItem)
 			if err != nil {
-				return err
+				return nil, err
 			}
 		}
 		if patchItem.ExpectedStatus == "Uninstall" && patchItem.Status == "Install" {
 			err := UninstallPatch(patchItem)
 			if err != nil {
-				return err
+				return nil, err
 			}
 		}
 	}
-	return nil
+	return patches, nil
 }
 
 func RefreshPatches(patches []*Patch) ([]*Patch, error) {

@@ -68,6 +68,7 @@ class AssetListPage extends BaseListPage {
       isPermanent: true,
       remoteApps: [],
       services: [],
+      patches: [],
     };
   }
 
